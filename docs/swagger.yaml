@@ -1,0 +1,78 @@
+basePath: /
+definitions:
+  api.Error:
+    properties:
+      code:
+        example: 409
+        type: integer
+      message:
+        example: Some Error
+        type: string
+    type: object
+  dto.CreateSharing_Params:
+    properties:
+      content:
+        example: aaaabbbbcccc
+        type: string
+    type: object
+  dto.Sharing:
+    properties:
+      content:
+        example: aaaabbbbcccc
+        type: string
+      hash:
+        example: 11c85195ae99540ac07f80e2905e6e39aaefc4ac94cd380f366e79ba83560566
+        type: string
+    type: object
+info:
+  contact: {}
+  description: API documentation
+  title: Visualtez Storage API
+  version: "1.0"
+paths:
+  /sharings:
+    post:
+      consumes:
+      - application/json
+      description: Inserts a new sharing
+      operationId: insert-sharing
+      parameters:
+      - description: Shared content
+        in: body
+        name: content
+        required: true
+        schema:
+          $ref: '#/definitions/dto.CreateSharing_Params'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.Sharing'
+        default:
+          description: ""
+          schema:
+            $ref: '#/definitions/api.Error'
+  /sharings/{hash}:
+    get:
+      description: Get sharing by hash
+      operationId: get-sharing-by-hash
+      parameters:
+      - description: Sharing hash
+        in: path
+        name: hash
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.Sharing'
+        default:
+          description: ""
+          schema:
+            $ref: '#/definitions/api.Error'
+swagger: "2.0"

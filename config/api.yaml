@@ -1,0 +1,6 @@
+port: 4444
+database:
+  url: "mongodb://<user>:<password>@localhost:27017"
+log:
+  location: visualtez-storage.log
+  level: debug
