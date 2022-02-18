@@ -1,8 +1,10 @@
 package utils
 
-import "crypto/sha256"
+import (
+	"crypto/sha1"
+)
 
 func SHA256(data string) string {
-	hash := sha256.Sum256(BytesOfString(data))
+	hash := sha1.Sum(BytesOfString(data))
 	return HexOfBytes(hash[:])
 }
